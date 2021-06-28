@@ -210,3 +210,17 @@ def get_counties(df):
     # drop regionidcounty and fips columns
     df_dummies = df_dummies.drop(columns = ['regionidcounty'])
     return df_dummies
+
+def remove_outliers():
+    '''
+    remove outliers in bed, bath, zip, square feet, acres & tax rate
+    '''
+
+    return df[((df.bathroomcnt <= 7) & (df.bedroomcnt <= 7) & 
+               (df.regionidzip < 100000) & 
+               (df.bathroomcnt > 0) & 
+               (df.bedroomcnt > 0) & 
+               (df.acres < 20) &
+               (df.calculatedfinishedsquarefeet < 10000) & 
+               (df.taxrate < 10)
+              )]
